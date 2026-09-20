@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Task Tracker</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="app">
+    <!-- Header -->
+    <header class="header">
+      <div class="header-left">
+        <h1>Task Tracker</h1>
+        <p class="subtitle">Stay organized. Get things done.</p>
+      </div>
+      <div class="header-right">
+        <button id="theme-toggle" class="theme-btn" aria-label="Toggle theme">
+          <span class="sun">☀️</span>
+          <span class="moon">🌙</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Stats -->
+    <section class="stats">
+      <div class="stat-card">
+        <span class="stat-number" id="stat-total">0</span>
+        <span class="stat-label">Total</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-number" id="stat-active">0</span>
+        <span class="stat-label">Active</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-number" id="stat-completed">0</span>
+        <span class="stat-label">Done</span>
+      </div>
+    </section>
+
+    <!-- Add Task Form -->
+    <section class="add-task">
+      <form id="task-form">
+        <div class="form-row">
+          <input
+            type="text"
+            id="task-title"
+            placeholder="What needs to be done?"
+            required
+            autocomplete="off"
+          />
+        </div>
+        <div class="form-row form-row-secondary">
+          <input
+            type="text"
+            id="task-description"
+            placeholder="Description (optional)"
+            autocomplete="off"
+          />
+          <select id="task-priority">
+            <option value="low">Low</option>
+            <option value="medium" selected>Medium</option>
+            <option value="high">High</option>
+          </select>
+          <input type="date" id="task-due" />
+          <input
+            type="text"
+            id="task-category"
+            placeholder="Category"
+            list="category-list"
+            autocomplete="off"
+          />
+          <datalist id="category-list"></datalist>
+        </div>
+        <button type="submit" class="btn btn-primary">Add Task</button>
+      </form>
+    </section>
+
+    <!-- Filters -->
+    <section class="filters">
+      <div class="filter-group">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="active">Active</button>
+        <button class="filter-btn" data-filter="completed">Completed</button>
+      </div>
+      <div class="filter-group">
+        <select id="priority-filter">
+          <option value="all">All Priorities</option>
+          <option value="high">High</option>
+          <option value="medium">Medium</option>
+          <option value="low">Low</option>
+        </select>
+        <select id="category-filter">
+          <option value="all">All Categories</option>
+        </select>
+      </div>
+    </section>
+
+    <!-- Task List -->
+    <section class="task-list-container">
+      <ul id="task-list" class="task-list"></ul>
+      <div id="empty-state" class="empty-state hidden">
+        <p>No tasks yet. Add one above! ✨</p>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>Built with HTML, CSS & JavaScript • Data saved locally</p>
+    </footer>
+  </div>
+
+  <!-- Edit Modal -->
+  <div id="edit-modal" class="modal hidden">
+    <div class="modal-content">
+      <h2>Edit Task</h2>
+      <form id="edit-form">
+        <input type="hidden" id="edit-id" />
+        <div class="form-group">
+          <label for="edit-title">Title</label>
+          <input type="text" id="edit-title" required />
+        </div>
+        <div class="form-group">
+          <label for="edit-description">Description</label>
+          <input type="text" id="edit-description" />
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="edit-priority">Priority</label>
+            <select id="edit-priority">
+              <option value="low">Low</option>
+              <option value="medium">Medium</option>
+              <option value="high">High</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="edit-due">Due Date</label>
+            <input type="date" id="edit-due" />
+          </div>
+          <div class="form-group">
+            <label for="edit-category">Category</label>
+            <input type="text" id="edit-category" list="category-list" />
+          </div>
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="btn btn-secondary" id="cancel-edit">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Changes</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
